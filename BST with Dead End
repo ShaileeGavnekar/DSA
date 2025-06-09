@@ -1,0 +1,13 @@
+class Solution {
+    private boolean findDead(Node node, int mini, int maxi) {
+        if (node == null) return false;
+        if (mini == maxi) return true;
+        return findDead(node.left, mini, node.data - 1) || 
+               findDead(node.right, node.data + 1, maxi);
+    }
+
+    public boolean isDeadEnd(Node root) {
+        return findDead(root, 1, Integer.MAX_VALUE);
+    }
+}
+
