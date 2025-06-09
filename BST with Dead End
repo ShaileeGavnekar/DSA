@@ -1,4 +1,4 @@
-class Solution {
+class Solution { 
     private boolean findDead(Node node, int mini, int maxi) {
         if (node == null) return false;
         if (mini == maxi) return true;
