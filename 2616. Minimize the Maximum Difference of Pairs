@@ -1,0 +1,29 @@
+class Solution {
+    public boolean isValid(int[] nums,int diff,int p){
+        int idx=0,cnt=0;
+        while(idx<nums.length-1){
+            if(nums[idx+1]-nums[idx]<=diff){
+                cnt++;
+                idx+=2;
+            }
+            else idx++;
+        }
+        return cnt>=p;
+    }
+    public int minimizeMax(int[] nums, int p) {
+        Arrays.sort(nums);
+        int n=nums.length;       
+        int left=0,right=nums[n-1]-nums[0];
+        int ans=right;
+        while(left<=right){
+            int mid= left+(right-left)/2;
+            if(isValid(nums,mid,p)){
+                ans=mid;
+                right=mid-1;
+            }else{
+                left=mid+1;
+            }
+        }
+        return ans;
+    }
+}
