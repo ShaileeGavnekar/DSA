@@ -1,0 +1,28 @@
+class Solution {
+    public int minMaxDifference(int num) {
+        String s = String.valueOf(num);
+        int maxi = transformNumber(s, '9');
+        int mini = transformNumber(s, '0');
+        return maxi - mini;
+    }
+    private int transformNumber(String s, char targetDigit) {
+        Map<Character, Integer> map = new HashMap<>();
+        char toReplace = 0;
+        for (char ch : s.toCharArray()) {
+            if (ch != targetDigit) {
+                toReplace = ch;
+                break;
+            }
+        }
+        if (toReplace == 0) return Integer.parseInt(s);
+        int result = 0;
+        for (char ch : s.toCharArray()) {
+            if (ch == toReplace) {
+                result = result * 10 + (targetDigit - '0');
+            } else {
+                result = result * 10 + (ch - '0');
+            }
+        }
+        return result;
+    }
+}
