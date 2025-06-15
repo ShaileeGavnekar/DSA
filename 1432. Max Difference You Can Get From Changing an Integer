@@ -1,0 +1,41 @@
+class Solution {
+    public String replace(String s, char x, char y) {
+        StringBuilder ans = new StringBuilder();
+        int n = s.length();
+        for (int i = 0; i < n; i++) {
+            if (s.charAt(i) == x) {
+                ans.append(y);
+            } else {
+                ans.append(s.charAt(i));
+            }
+        }
+        return ans.toString();
+    }
+    public int maxDiff(int num) {
+        String mini=String.valueOf(num);
+        String maxi=String.valueOf(num);
+        int len=maxi.length();
+        for(int i=0;i<len;i++){
+            char ch=maxi.charAt(i);
+            if(ch!='9'){
+                maxi=replace(maxi,ch,'9');
+                break;
+            }
+        }
+        for(int i=0;i<len;i++){
+            char ch=mini.charAt(i);
+            if(i==0){
+                if(ch!='1'){
+                    mini=replace(mini,ch,'1');
+                    break;
+                }
+            }else{
+                if(ch!='0' && ch !=mini.charAt(0)){
+                    mini=replace(mini,ch,'0');
+                    break;
+                }
+            }
+        }
+        return Integer.parseInt(maxi.toString())- Integer.parseInt(mini.toString());
+    }
+}
