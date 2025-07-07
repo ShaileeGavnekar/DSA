@@ -7,9 +7,7 @@ class Solution {
         int ans=Integer.MIN_VALUE;
         for(int k:mp.keySet()){
             int val=mp.get(k);
-            if(k==val && k>ans){
-                ans=k;
-            }
+            if(k==val && k>ans) ans=k;
         }
         return ans==Integer.MIN_VALUE?-1:ans;
     }
