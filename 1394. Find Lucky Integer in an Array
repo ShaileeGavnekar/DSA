@@ -1,0 +1,16 @@
+class Solution {
+    public int findLucky(int[] arr) {
+        HashMap<Integer,Integer>mp=new HashMap<>();
+        for(int a:arr){
+            mp.put(a,mp.getOrDefault(a,0)+1);
+        }
+        int ans=Integer.MIN_VALUE;
+        for(int k:mp.keySet()){
+            int val=mp.get(k);
+            if(k==val && k>ans){
+                ans=k;
+            }
+        }
+        return ans==Integer.MIN_VALUE?-1:ans;
+    }
+}
