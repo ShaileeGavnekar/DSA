@@ -1,0 +1,23 @@
+class Solution {
+    public int numOfUnplacedFruits(int[] fruits, int[] baskets) {
+        int n=fruits.length;
+        int ans=0;
+        int[] vis1= new int[n];
+        int[] vis2= new int[n];
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                if(fruits[i]<=baskets[j] && vis1[j]==0){
+                    vis1[j]=1;
+                    vis2[i]=1;
+                    break;
+                }
+            }
+        }
+        for(int i=0;i<n;i++){
+            if(vis2[i]==0){
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
