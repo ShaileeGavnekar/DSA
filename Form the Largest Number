@@ -1,0 +1,17 @@
+class Solution {
+    public String findLargest(int[] arr) {
+        // code here
+        int n=arr.length;
+        List<String>temp= new ArrayList<>();
+        for(int num:arr){
+            temp.add(String.valueOf(num));
+        }
+        temp.sort((a,b)->(b+a).compareTo(a+b));
+        if(temp.get(0).equals("0")) return "0";
+        StringBuilder ans= new StringBuilder();
+        for(String str:temp){
+            ans.append(str);
+        }
+        return ans.toString();
+    }
+}
