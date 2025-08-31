@@ -3,7 +3,6 @@ class Solution {
         int n = arr.length;
         int left = 0, right = n - 1;
         int ans = 0;
-
         while (left < right) {
             int width = right - left;
             int height = Math.min(arr[left], arr[right]);
