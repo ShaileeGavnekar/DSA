@@ -1,0 +1,43 @@
+class Solution {
+    private class Pair {
+        double first;  
+        int second;  
+        Pair(double first, int second) {
+            this.first = first;
+            this.second = second;
+        }
+    }
+
+    public double maxAverageRatio(int[][] classes, int extraStudents) {
+        int n = classes.length;
+
+        PriorityQueue<Pair> pq = new PriorityQueue<>(
+            (a, b) -> Double.compare(b.first, a.first)
+        );
+
+        for (int i = 0; i < n; i++) {
+            double currRatio = (double) classes[i][0] / classes[i][1];
+            double newRatio = (double) (classes[i][0] + 1) / (classes[i][1] + 1);
+            double diff = newRatio - currRatio;
+            pq.add(new Pair(diff, i));
+        }
+
+        while (extraStudents-- > 0) {
+            Pair top = pq.poll();
+            int index = top.second;
+
+            classes[index][0]++;
+            classes[index][1]++;
+
+            double currRatio = (double) classes[index][0] / classes[index][1];
+            double newRatio = (double) (classes[index][0] + 1) / (classes[index][1] + 1);
+            double diff = newRatio - currRatio;
+            pq.add(new Pair(diff, index));
+        }
+        double ans = 0;
+        for (int i = 0; i < n; i++) {
+            ans += (double) classes[i][0] / classes[i][1];
+        }
+        return ans / n;
+    }
+}
