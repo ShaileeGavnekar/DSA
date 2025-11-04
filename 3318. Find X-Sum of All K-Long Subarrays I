@@ -1,0 +1,37 @@
+class Solution {
+    public int[] findXSum(int[] nums, int k, int x) {
+        int n = nums.length;
+        int[] ans = new int[n - k + 1];
+        HashMap<Integer, Integer> freq = new HashMap<>();
+        for (int i = 0; i < k; i++) {
+            freq.put(nums[i], freq.getOrDefault(nums[i], 0) + 1);
+        }
+        ans[0] = getXSum(freq, x);
+        for (int i = k; i < n; i++) {
+            freq.put(nums[i - k], freq.get(nums[i - k]) - 1);
+            if (freq.get(nums[i - k]) == 0)
+                freq.remove(nums[i - k]);
+            freq.put(nums[i], freq.getOrDefault(nums[i], 0) + 1);
+            ans[i - k + 1] = getXSum(freq, x);
+        }
+        return ans;
+    }
+    private int getXSum(HashMap<Integer, Integer> mp, int x) {
+        PriorityQueue<int[]> pq = new PriorityQueue<>(
+            (a, b) -> {
+                if (a[1] != b[1]) return b[1] - a[1]; 
+                return b[0] - a[0]; 
+            }
+        );
+        for (int key:mp.keySet()) {
+            int val=mp.get(key);
+            pq.offer(new int[]{key,val});
+        }
+        int res = 0;
+        for (int i = 0; i < x && !pq.isEmpty(); i++) {
+            int[] top = pq.poll();
+            res += top[0] * top[1];
+        }
+        return res;
+    }
+}
